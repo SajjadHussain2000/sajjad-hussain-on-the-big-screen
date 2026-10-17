@@ -1,0 +1,67 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out),
+    border-color var(--duration) ease;
+}
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+  }
+}
+.card:focus-within {
+  border-color: var(--primary);
+}
+
+.cover {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 22%, var(--surface-2)),
+    color-mix(in srgb, var(--accent) 18%, var(--surface-2))
+  );
+  color: color-mix(in srgb, var(--primary) 60%, var(--text));
+  font-size: var(--text-3xl);
+  font-weight: 700;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+}
+
+.title {
+  font-size: var(--text-lg);
+}
+
+.link {
+  color: var(--text);
+  text-decoration: none;
+}
+/* whole card is clickable */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.link:focus-visible {
+  outline: none;
+}
+
+img.cover {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

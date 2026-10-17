@@ -1,0 +1,174 @@
+/* Stands on the right edge, above the bug jar, and walks to a new height per page (--spot). */
+.guide {
+  --w: 150px;
+  position: fixed;
+  right: var(--space-4);
+  bottom: 84px;
+  z-index: 57;
+  width: var(--w);
+  pointer-events: none;
+  transform: translateY(calc(-1 * var(--spot, 0vh)));
+  transition: transform 900ms cubic-bezier(0.45, 0, 0.2, 1.2);
+}
+
+.avatar {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 8px 14px rgb(0 0 0 / 0.18));
+  animation: bob 3.2s ease-in-out infinite;
+}
+@keyframes bob {
+  50% {
+    translate: 0 -5px;
+  }
+}
+
+/* replayed on every page change: a little hop with squash & stretch */
+.hop {
+  display: block;
+  transform-origin: bottom center;
+  animation: hop 900ms var(--ease-out);
+}
+@keyframes hop {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  15% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  40% {
+    transform: translateY(-28px) scale(0.95, 1.06);
+  }
+  70% {
+    transform: translateY(0) scale(1.05, 0.94);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+/* ---------- speech dialog (to the left of the avatar) ---------- */
+.bubble {
+  position: absolute;
+  right: calc(100% + 4px);
+  top: 4%;
+  width: min(300px, calc(100vw - var(--w) - 48px));
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 6px var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  transform-origin: top right;
+  animation: pop 320ms cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 34px;
+  width: 14px;
+  height: 14px;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  transform: rotate(45deg);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateX(12px);
+  }
+}
+
+.bubbleHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+}
+.name {
+  font-family: var(--font-spicy);
+  font-size: 1.25rem; /* Caveat runs small */
+  line-height: 1;
+  color: var(--accent);
+}
+.closeBubble {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.text {
+  font-size: var(--text-base);
+  line-height: 1.45;
+  min-height: 1.45em;
+}
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--primary);
+  animation: caret 0.8s steps(1) infinite;
+}
+.caret[data-done="true"] {
+  opacity: 0;
+  animation: none;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.askBtn {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- smaller screens ---------- */
+@media (max-width: 1100px) {
+  .guide {
+    --w: 120px;
+  }
+}
+@media (max-width: 640px) {
+  .guide {
+    --w: 86px;
+    right: var(--space-2);
+    bottom: 76px;
+    transform: translateY(calc(-0.5 * var(--spot, 0vh)));
+  }
+  .text {
+    font-size: var(--text-sm);
+  }
+}

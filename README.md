@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sajjad Hussain — Portfolio
 
-## Getting Started
+Personal portfolio built with Next.js 16. Includes an avatar tour guide, a site-wide Bug Hunt game with a live leaderboard, and project case studies.
 
-First, run the development server:
+See [PLAN.md](PLAN.md) for the full plan, design decisions and roadmap.
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Without Upstash keys the Bug Hunt uses an in-memory store, which is fine for local development.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in what you need:
 
-## Learn More
+| Variable | Purpose |
+|---|---|
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Leaderboards and hunt sessions. **Required in production.** |
+| `HUNT_CODES` | Code words for the technical bugs (JSON). Use your own in production. |
+| `ADMIN_SECRET` | Enables `DELETE /api/hunt?mode=…&id=…` for removing leaderboard entries. |
+| `NEXT_PUBLIC_SITE_URL` | Custom domain. Defaults to the Vercel production URL. |
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hosted on Vercel. Every push to `main` deploys to production; pull requests get preview URLs. CI runs lint and build on every push and pull request.
