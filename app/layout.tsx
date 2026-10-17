@@ -13,8 +13,9 @@ import "./globals.css";
 // Body: Plus Jakarta Sans (clean, very readable). Headings: Bricolage Grotesque (a bit of character). Accent: Caveat (handwritten).
 const jakarta = Plus_Jakarta_Sans({ variable: "--font-jakarta", subsets: ["latin"] });
 const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"] });
-const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin"] });
-const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"] });
+// Not needed for first paint, so they don't compete with the body and heading fonts (better LCP).
+const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin"], preload: false });
+const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
