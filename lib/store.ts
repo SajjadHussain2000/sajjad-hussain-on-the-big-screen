@@ -3,8 +3,9 @@
 
 type Arg = string | number;
 
-const url = process.env.UPSTASH_REDIS_REST_URL;
-const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+// UPSTASH_* when set by hand; KV_REST_API_* when added through Vercel's Upstash integration.
+const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 
 /** Thrown when a deployed site has no Upstash keys; callers show "temporarily offline". */
 export class StoreOffline extends Error {}
