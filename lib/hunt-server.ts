@@ -20,8 +20,22 @@ const CODES: Record<string, string> = {
   8: "SEMICOLON",
   9: "HIDEOUT",
   10: "TYPO404",
-  ...JSON.parse(process.env.HUNT_CODES || "{}"),
+  ...parseCodes(process.env.HUNT_CODES),
 };
+
+// A malformed HUNT_CODES must never take the site down: fall back to the defaults and log it.
+function parseCodes(raw?: string): Record<string, string> {
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return Object.fromEntries(
+      Object.entries(parsed).filter(([k, v]) => ["8", "9", "10"].includes(k) && typeof v === "string" && v.trim()),
+    ) as Record<string, string>;
+  } catch {
+    console.error("HUNT_CODES is not valid JSON; using default code words.");
+    return {};
+  }
+}
 export const codeFor = (bugId: 8 | 9 | 10) => CODES[bugId];
 
 // Bugs 1–7 are caught by clicking / calling catchBug().
