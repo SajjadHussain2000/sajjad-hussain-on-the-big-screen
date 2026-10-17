@@ -28,7 +28,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
       </ul>
       <div className={styles.grid} aria-live="polite">
         {shown.map((p) => (
-          <ProjectCard key={p.slug} project={p} sticker={p.slug === projects[1]?.slug} />
+          <ProjectCard key={p.slug} project={p} sticker={p.slug === projects[1]?.slug} headingLevel={2} />
         ))}
       </div>
     </>

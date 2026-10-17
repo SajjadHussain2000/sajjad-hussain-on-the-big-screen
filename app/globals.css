@@ -10,7 +10,7 @@
   --primary: #4242fa;
   --primary-hover: #2c0b8e;
   --on-primary: #ffffff;
-  --accent: #e60067;
+  --accent: #c4005a; /* Josh's #e60067, darkened to pass 4.5:1 on the grey band */
   --tertiary: #2c0b8e;
   --decorative: #63bce9;
   --focus: #4242fa;
@@ -73,7 +73,7 @@
     --primary: #809fff;
     --primary-hover: #99b3ff;
     --on-primary: #0d0f12;
-    --accent: #ff1a81;
+    --accent: #ff5ca3; /* lighter than Josh's #ff1a81 so it passes 4.5:1 on dark surfaces */
     --tertiary: #e6b3ff;
     --decorative: #66aacc;
     --focus: #809fff;
@@ -93,7 +93,7 @@
   --primary: #809fff;
   --primary-hover: #99b3ff;
   --on-primary: #0d0f12;
-  --accent: #ff1a81;
+  --accent: #ff5ca3; /* lighter than Josh's #ff1a81 so it passes 4.5:1 on dark surfaces */
   --tertiary: #e6b3ff;
   --decorative: #66aacc;
   --focus: #809fff;
@@ -315,8 +315,9 @@ code {
 
 /* page enter */
 @keyframes fade-up {
+  /* start partly visible: Chrome ignores opacity-0 content for LCP, so a full fade-in delays it */
   from {
-    opacity: 0;
+    opacity: 0.4;
     transform: translateY(8px);
   }
 }

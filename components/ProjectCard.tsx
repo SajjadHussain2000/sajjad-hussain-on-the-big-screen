@@ -4,7 +4,10 @@ import type { Project } from "@/lib/site";
 import Bug from "./hunt/Bug";
 import styles from "./ProjectCard.module.css";
 
-export default function ProjectCard({ project, sticker }: { project: Project; sticker?: boolean }) {
+type Props = { project: Project; sticker?: boolean; headingLevel?: 2 | 3 };
+
+export default function ProjectCard({ project, sticker, headingLevel = 3 }: Props) {
+  const Heading = headingLevel === 2 ? "h2" : "h3"; // keep heading order valid on each page
   return (
     <article className={styles.card}>
       {sticker && (
@@ -21,11 +24,11 @@ export default function ProjectCard({ project, sticker }: { project: Project; st
       )}
       <div className={styles.body}>
         {project.year && <p className="eyebrow">{project.year}</p>}
-        <h3 className={styles.title}>
+        <Heading className={styles.title}>
           <Link href={`/projects/${project.slug}`} className={styles.link}>
             {project.title}
           </Link>
-        </h3>
+        </Heading>
         <p className="muted">{project.summary}</p>
         <ul className="tags">
           {project.stack.map((t) => (

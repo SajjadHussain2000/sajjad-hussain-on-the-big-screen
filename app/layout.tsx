@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque, Caveat, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Guide />
         <Crawler />
         <BugJar />
+        <Analytics />
         {/* Bug #8: a code word hiding in the page source */}
         <div hidden dangerouslySetInnerHTML={{ __html: `<!-- 🐛 You found me! Bug code: ${codeFor(8)} -->` }} />
       </body>
