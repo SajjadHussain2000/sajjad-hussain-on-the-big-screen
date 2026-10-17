@@ -504,7 +504,7 @@ Run after Step 4 (or Step 5) using the [Quality Checklist](#9-quality-checklist-
 ---
 
 ## 9. Quality Checklist (before launch)
-- [ ] Lighthouse ≥ 95 on Performance, Accessibility, Best Practices, SEO
+- [x] Lighthouse ≥ 95 on Performance, Accessibility, Best Practices, SEO (98–100 on all pages, 2026-10-17)
 - [ ] Full keyboard navigation, including Bug Hunt
 - [ ] `prefers-reduced-motion` respected everywhere
 - [ ] Works on iOS Safari, Android Chrome, desktop Chrome / Firefox / Safari
@@ -564,7 +564,9 @@ All visitor-facing copy (pages, case studies, guide lines, Bug Hunt panel, hints
 - **Secrets in Vercel only:** `HUNT_CODES` (custom code words; malformed JSON falls back to the defaults), `ADMIN_SECRET`.
 - **Site URL:** derived from `VERCEL_PROJECT_PRODUCTION_URL`. Set `NEXT_PUBLIC_SITE_URL` when a custom domain is added.
 - **Smoke test (2026-10-17):** all routes 200 (404 for unknown), robots/sitemap/OG use the live URL, custom code words active, catch/hint/finish guards and admin protection verified, no console errors.
-- **Still to do:** custom domain (optional), Vercel Analytics, Lighthouse pass.
+- **Analytics:** `@vercel/analytics` added to the root layout (enable it in Vercel → project → Analytics).
+- **Lighthouse (2026-10-17, live site, mobile):** Home 100/100/100/100, About 100/100/100/100, Projects 98/100/100/100, case study 100/100/100/100, Hall 100/100/100/100 (Performance/Accessibility/Best Practices/SEO). Desktop home 100 across the board, LCP 0.5s. Fixes that got it there: accent pink adjusted for 4.5:1 contrast in both themes, valid heading order on `/projects`, fade-in starting partly visible (Chrome ignores opacity-0 content for LCP), and only the body and heading fonts preloaded (mobile LCP 2.9s → 1.7s).
+- **Still to do:** custom domain (optional).
 
 ---
 
