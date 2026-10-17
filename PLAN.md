@@ -556,6 +556,18 @@ All visitor-facing copy (pages, case studies, guide lines, Bug Hunt panel, hints
 
 ---
 
+## 11b. Deployment
+
+- **Live:** https://sajjad-hussain-on-the-big-screen.vercel.app (Vercel Hobby, free). Pages are prerendered and served from the CDN edge (Mumbai for India).
+- **Repo:** github.com/SajjadHussain2000/sajjad-hussain-on-the-big-screen (public). Pushing to `main` deploys production; pull requests get preview URLs. GitHub Actions runs lint + build.
+- **Data:** Upstash Redis (free, Mumbai) connected through Vercel Storage. The code reads `UPSTASH_REDIS_REST_*` or `KV_REST_API_*`. Without keys on Vercel, the hunt API returns 503 and the leaderboard shows "temporarily offline".
+- **Secrets in Vercel only:** `HUNT_CODES` (custom code words; malformed JSON falls back to the defaults), `ADMIN_SECRET`.
+- **Site URL:** derived from `VERCEL_PROJECT_PRODUCTION_URL`. Set `NEXT_PUBLIC_SITE_URL` when a custom domain is added.
+- **Smoke test (2026-10-17):** all routes 200 (404 for unknown), robots/sitemap/OG use the live URL, custom code words active, catch/hint/finish guards and admin protection verified, no console errors.
+- **Still to do:** custom domain (optional), Vercel Analytics, Lighthouse pass.
+
+---
+
 ## 12. Portfolio Projects Roadmap (systems-focused)
 
 Six projects that show thinking beyond the frontend: architecture, concurrency, data correctness and stability. Each lives in **its own repository** and gets a case study on `/projects` once shipped. Unbuilt projects are **not** listed on the site.
